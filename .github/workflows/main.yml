@@ -1,0 +1,14 @@
+- name: Update dependency graph
+  users: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18
+
+- name: scp ssh pipelines
+  users: cross-the-world/ssh-scp-ssh-pipelines@latest
+  with:
+    host: ${{ secrets.HOST }}
+    user: ${{ secrets.USERNAME }}
+    pass: ${{ secrets.PASSWORD }}
+    port: ${{ secrets.PORT }}
+    scp: |
+      ./target/*.war => /tmp/
+    last_ssh: |
+      ls -lart /tmp
